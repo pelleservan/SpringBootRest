@@ -9,7 +9,7 @@ Ce projet est une application Spring Boot qui offre une API REST pour gérer les
 
 ## Exécution du projet
 
-1. Clonez le dépôt : `git clone https://github.com/votre-utilisateur/votre-projet.git`
+1. Clonez le dépôt : `git clone https://github.com/pelleservan/SpringBootRest.git`
 2. Accédez au répertoire du projet : `cd votre-projet`
 3. Exécutez l'application : `./mvnw spring-boot:run`
 
