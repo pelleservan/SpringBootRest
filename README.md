@@ -19,6 +19,30 @@ L'application sera accessible à l'adresse [http://localhost:8080](http://localh
 
 L'API REST offre les fonctionnalités CRUD pour les entités "Team" et "Player". Voici quelques exemples d'utilisation :
 
+### Peupler la base de données
+
+Pour peupler notre base de données des fichiers **JSON** sont disponible dans `./API_REST/src/main/resources/data`. Les données contenus dans ces fichiers sont formater pour être correctement interprété par le projet : 
+
+- **teams.jsp**
+  ```json
+  {"name": "Real Madrid"}
+
+- **player.json**
+  ```json
+  {"first_name": "Lionel", "last_name": "Messi", "team": {"id": 1, "name": "Real Madrid"}}
+
+Il est important de commencer par insérer des équipes si l'on veux ratacher des jeueurs à une équipe. Pour cela deux méthodes :
+
+- POSTMAN :
+
+Consulter la documentation [https://www.postman.com/api-documentation-tool/](https://www.postman.com/api-documentation-tool/).
+
+Suivre les étape décrite dans cette vidéo :
+
+![Démo Postman](./images/addPlayer.mov)
+
+### Récupération de données
+
 - **Récupérer la liste des équipes :**
   ```bash
   curl http://localhost:8080/api/teams
