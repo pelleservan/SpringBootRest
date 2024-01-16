@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Teams Information</title>
+        <link rel="stylesheet" th:href="@{/css/Style.css}" />
+    </head>
+    <body>
+
+        <div th:replace="header :: header"></div>
+
+        <h2>Teams Information</h2>
+
+        <table id="teamsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="team : ${teams}">
+                    <td th:text="${team.id}"></td>
+                    <td th:text="${team.name}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>
