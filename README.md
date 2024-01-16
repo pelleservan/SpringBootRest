@@ -39,7 +39,7 @@ Consulter la documentation [https://www.postman.com/api-documentation-tool/](htt
 
 Suivre les étape décrite dans cette vidéo :
 
-![Démo Postman](./images/addPlayer.mov)
+![Démo Postman](./images/addPlayer.gif)
 
 ### Récupération de données
 
