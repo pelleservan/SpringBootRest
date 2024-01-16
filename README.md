@@ -36,3 +36,9 @@ Pour une visualisation plus simple des données des styles ont été développer
 - **Récupérer la liste des joueurs :**
   ```bash
   curl http://localhost:8080/players
+
+## Technologies utilisées
+- Spring Boot
+- Thymeleaf
+- H2 Database
+- Maven
