@@ -23,9 +23,15 @@ L'API REST offre les fonctionnalités CRUD pour les entités "Team" et "Player".
   ```bash
   curl http://localhost:8080/api/teams
 
+![Capture d'écran 1](images/getTeamList.png)
+*Récupération de la liste des équipes.*
+
 - **Récupérer la liste des joueurs :**
   ```bash
   curl http://localhost:8080/api/players
+
+![Capture d'écran 1](images/getPlayerList.png)
+*Récupération de la liste des joueurs.*
 
 Pour une visualisation plus simple des données des styles ont été développer pour organiser les données. Ces tables sont disponible via :
 
@@ -33,9 +39,15 @@ Pour une visualisation plus simple des données des styles ont été développer
   ```bash
   curl http://localhost:8080/teams
 
+![Capture d'écran 1](images/getTeamTable.png)
+*Récupération de la table des équipes.*
+
 - **Récupérer la liste des joueurs :**
   ```bash
   curl http://localhost:8080/players
+
+![Capture d'écran 1](images/getPlayerList.png)
+*Récupération de la table des joueurs.*
 
 ## Technologies utilisées
 - Spring Boot
