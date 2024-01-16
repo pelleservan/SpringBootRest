@@ -22,3 +22,17 @@ L'API REST offre les fonctionnalités CRUD pour les entités "Team" et "Player".
 - **Récupérer la liste des équipes :**
   ```bash
   curl http://localhost:8080/api/teams
+
+- **Récupérer la liste des joueurs :**
+  ```bash
+  curl http://localhost:8080/api/players
+
+Pour une visualisation plus simple des données des styles ont été développer pour organiser les données. Ces tables sont disponible via :
+
+- **Récupérer la liste des équipes dans :**
+  ```bash
+  curl http://localhost:8080/teams
+
+- **Récupérer la liste des joueurs :**
+  ```bash
+  curl http://localhost:8080/players
