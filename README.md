@@ -35,11 +35,11 @@ Il est important de commencer par insérer des équipes si l'on veux ratacher de
 
 - POSTMAN :
 
-Consulter la documentation [https://www.postman.com/api-documentation-tool/](https://www.postman.com/api-documentation-tool/).
+1. Consulter la documentation [https://www.postman.com/api-documentation-tool/](https://www.postman.com/api-documentation-tool/) pour créer des requête **POST** sur l'url `http://localhost:8080/api/teams` (pout une équipe) et `http://localhost:8080/api/players` pour un joueur.
 
 Suivre les étape décrite dans cette vidéo :
 
-![Démo Postman](./images/addPlayer.gif)
+![Démo Postman](https://github.com/pelleservan/SpringBootRest/images/addPlayer.gif)
 
 ### Récupération de données
 
