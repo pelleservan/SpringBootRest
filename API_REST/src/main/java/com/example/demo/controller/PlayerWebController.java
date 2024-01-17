@@ -75,7 +75,6 @@ public class PlayerWebController {
 
     @PostMapping("/players/del")
     public String deletePlayer(@RequestParam(name = "player_id") Long player_id) {
-        System.out.println("Received player_id: " + player_id);
         repository.deleteById(player_id);
         return "redirect:/players";
     }

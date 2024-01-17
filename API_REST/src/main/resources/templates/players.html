@@ -87,7 +87,7 @@
     <h2>Delete Player</h2>
     <form th:action="@{/players/del}" method="post" th:object="${newPlayer}" onsubmit="return submitDelForm()">
         <label th:for="player_id">Player ID:</label>
-        <select id="player" name="player_id" th:field="*{player_id}">
+        <select id="player" name="player_id" th:field="*{player_id}" required>
             <option value="" selected>Select ID</option>
             <option th:each="player : ${allPlayers}" th:value="${player.player_id}" th:text="${player.player_id}"></option>
         </select>

@@ -6,7 +6,7 @@
     <title>Teams Information</title>
     <link rel="stylesheet" th:href="@{/css/Style.css}" />
     <style>
-        #addTeamPopup {
+        .popup {
             display: none;
             position: fixed;
             top: 50%;
@@ -22,21 +22,21 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         }
 
-        #addTeamPopup h3 {
+        .popup h3 {
             color: #58a6ff;
         }
 
-        #addTeamPopup label {
+        .popup label {
             color: #c9d1d9;
         }
 
-        #addTeamPopup input {
+        .popup input {
             background-color: #2d2d2d;
             color: #c9d1d9;
             border: 1px solid #2d2d2d;
         }
 
-        #addTeamPopup button {
+        .popup button {
             background-color: #0d1117;
             color: #c9d1d9;
             padding: 8px 12px;
@@ -45,7 +45,7 @@
             border-radius: 4px;
         }
 
-        #addTeamPopup button:hover {
+        .popup button:hover {
             background-color: #161b22;
         }
 
@@ -57,18 +57,33 @@
 
 <div id="ctn" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px">
     <h2 style="margin: 0;">Teams Information</h2>
-    <button onclick="toggleAddTeamPopup()" style="text-decoration: none; color: white; padding: 8px 12px; border: 1px solid #58a6ff; border-radius: 4px; background-color: #0d1117; cursor: pointer; font-size: 18px;" onmouseover="this.style.backgroundColor='#161b22'" onmouseout="this.style.backgroundColor='#0d1117'">Add Team</button>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button onclick="toggleAddTeamPopup()" style="text-decoration: none; color: white; padding: 8px 12px; border: 1px solid #58a6ff; border-radius: 4px; background-color: #0d1117; cursor: pointer; font-size: 18px; margin-right: 10px;" onmouseover="this.style.backgroundColor='#161b22'" onmouseout="this.style.backgroundColor='#0d1117'">Add Team</button>
+        <button onclick="toggleDelTeamPopup()" style="text-decoration: none; color: white; padding: 8px 12px; border: 1px solid #58a6ff; border-radius: 4px; background-color: #0d1117; cursor: pointer; font-size: 18px;" onmouseover="this.style.backgroundColor='#161b22'" onmouseout="this.style.backgroundColor='#0d1117'">Del Team</button>
+    </div>
 </div>
 
-
-<div id="addTeamPopup">
+<div class="popup" id="addTeamPopup" style="display: none;">
     <h3>Add New Team</h3>
-    <form th:action="@{/teams/add}" method="post" th:object="${newTeam}" onsubmit="return submitForm()">
+    <form th:action="@{/teams/add}" method="post" th:object="${newTeam}" onsubmit="return submitAddForm()">
         <label for="name">Team Name:</label>
         <input type="text" id="name" name="name" th:field="*{name}" required>
         <button type="submit">Add Team</button>
     </form>
     <button onclick="toggleAddTeamPopup()">Cancel</button>
+</div>
+
+<div class="popup" id="delTeamPopup" style="display: none;">
+    <h2>Delete Team</h2>
+    <form th:action="@{'/teams/del'}" method="post" th:object="${newTeam}" onsubmit="return submitDelForm()">
+        <label th:for="team_id">Select Team:</label>
+        <select id="team" name="team_id" th:field="*{id}" required>
+            <option value="" selected>Select ID</option>
+            <option th:each="team : ${allTeams}" th:value="${team.id}" th:text="${team.id}"></option>
+        </select>
+        <button type="submit">Delete Team</button>
+    </form>
+    <button onclick="toggleDelTeamPopup()">Cancel</button>
 </div>
 
 <table id="teamsTable">
@@ -86,11 +101,6 @@
         <td th:text="${team.name}"></td>
         <td th:text="${team.players.size()}"></td>
         <td>
-            <span th:each="player : ${team.players}">
-            <span th:text="${player.last_name}"></span>
-        </span>
-        </td>
-
     </tr>
     </tbody>
 </table>
@@ -107,9 +117,25 @@
         }
     }
 
-    function submitForm() {
-        toggleAddTeamPopup(); // Cacher le pop-up après la soumission du formulaire
-        return true; // Permettre la soumission normale du formulaire
+    function toggleDelTeamPopup() {
+        var popup = document.getElementById("delTeamPopup");
+        if (popup) {
+            if (popup.style.display === 'none' || popup.style.display === '') {
+                popup.style.display = 'block';
+            } else {
+                popup.style.display = 'none';
+            }
+        }
+    }
+
+    function submitAddForm() {
+        toggleAddTeamPopup();
+        return true;
+    }
+
+    function submitDelForm() {
+        toggleDelTeamPopup();
+        return true;
     }
 </script>
 
