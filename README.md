@@ -39,7 +39,7 @@ Il est important de commencer par insérer des équipes si l'on veux ratacher de
 
 Suivre les étape décrite dans cette vidéo :
 
-![Démo Postman](https://github.com/pelleservan/SpringBootRest/images/addPlayer.gif)
+![Démo Postman](./images/addPlayer.gif)
 
 ### Récupération de données
 
