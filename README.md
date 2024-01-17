@@ -70,7 +70,7 @@ Pour une visualisation plus simple des données des styles ont été développer
   ```bash
   curl http://localhost:8080/players
 
-![Capture d'écran 1](images/getPlayerList.png)
+![Capture d'écran 1](images/getPlayerTable.png)
 *Récupération de la table des joueurs.*
 
 ## Technologies utilisées
