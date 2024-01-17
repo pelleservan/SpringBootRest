@@ -47,6 +47,22 @@ public class PlayerRestController {
                 });
     }
 
+    @PatchMapping("/{player_id}")
+    Player partiallyUpdatePlayer(@RequestBody Player updatedPlayer, @PathVariable Long player_id) {
+        return repository.findById(player_id)
+                .map(player -> {
+                    if (updatedPlayer.getFirst_name() != null) {
+                        player.setFirst_name(updatedPlayer.getFirst_name());
+                    }
+                    if (updatedPlayer.getLast_name() != null) {
+                        player.setLast_name(updatedPlayer.getLast_name());
+                    }
+                    return repository.save(player);
+                })
+                .orElseThrow(() -> new PlayerNoteFoundException(player_id));
+    }
+
+
     @DeleteMapping("/{player_id}")
     void deletePlayer(@PathVariable Long player_id) {
         repository.deleteById(player_id);

@@ -1,35 +1,155 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Players Information</title>
-      <link rel="stylesheet" th:href="@{/css/Style.css}" />
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players Information</title>
+    <link rel="stylesheet" th:href="@{/css/Style.css}" />
+    <style>
+    .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            border: 1px solid #58a6ff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            border-radius: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
 
-        <div th:replace="header :: header"></div>
+        .popup h3 {
+            color: #58a6ff;
+        }
 
-        <h2>Players Information</h2>
+        .popup label {
+            color: #c9d1d9;
+        }
 
-        <table id="playerTable">
-              <thead>
-                  <tr>
-                      <th>ID</th>
-                      <th>First name</th>
-                      <th>Last name</th>
-                      <th>Team</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr th:each="player : ${players}">
-                      <td th:text="${player.id}"></td>
-                      <td th:text="${player.first_name}"></td>
-                      <td th:text="${player.last_name}"></td>
-                      <td th:text="${player.team.name}"></td>
-                  </tr>
-              </tbody>
-        </table>
+        .popup input {
+            background-color: #2d2d2d;
+            color: #c9d1d9;
+            border: 1px solid #2d2d2d;
+        }
 
-    </body>
+        .popup button {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            padding: 8px 12px;
+            cursor: pointer;
+            border: 1px solid #58a6ff;
+            border-radius: 4px;
+        }
+
+        .popup button:hover {
+            background-color: #161b22;
+        }
+
+    </style>
+</head>
+<body>
+
+<div th:replace="header :: header"></div>
+
+<div id="ctn" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px">
+    <h2 style="margin: 0;">Player Information</h2>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button onclick="toggleAddPlayerPopup()" style="text-decoration: none; color: white; padding: 8px 12px; border: 1px solid #58a6ff; border-radius: 4px; background-color: #0d1117; cursor: pointer; font-size: 18px; margin-right: 10px;" onmouseover="this.style.backgroundColor='#161b22'" onmouseout="this.style.backgroundColor='#0d1117'">Add Player</button>
+        <button onclick="toggleDelPlayerPopup()" style="text-decoration: none; color: white; padding: 8px 12px; border: 1px solid #58a6ff; border-radius: 4px; background-color: #0d1117; cursor: pointer; font-size: 18px;" onmouseover="this.style.backgroundColor='#161b22'" onmouseout="this.style.backgroundColor='#0d1117'">Del Player</button>
+    </div>
+</div>
+
+<div class="popup" id="addPlayerPopup" style="display: none;">
+    <h2>Add Player</h2>
+    <form th:action="@{/players/add}" th:object="${newPlayer}" method="post" onsubmit="return submitAddForm()">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" th:field="*{first_name}" required/>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" th:field="*{last_name}"/>
+
+        <label for="team">Team:</label>
+        <select id="team" name="teamId" th:field="*{teamId}">
+            <option value="" selected>Select Team</option>
+            <option th:each="team : ${allTeams}" th:value="${team.id}" th:text="${team.name}"></option>
+        </select>
+
+        <button type="submit">Add Player</button>
+    </form>
+    <button onclick="toggleAddPlayerPopup()">Cancel</button>
+</div>
+
+<div class="popup" id="delPlayerPopup" style="display: none;">
+    <h2>Delete Player</h2>
+    <form th:action="@{/players/del}" method="post" th:object="${newPlayer}" onsubmit="return submitDelForm()">
+        <label th:for="player_id">Player ID:</label>
+        <select id="player" name="player_id" th:field="*{player_id}">
+            <option value="" selected>Select ID</option>
+            <option th:each="player : ${allPlayers}" th:value="${player.player_id}" th:text="${player.player_id}"></option>
+        </select>
+        <button type="submit">Delete Player</button>
+    </form>
+    <button onclick="toggleDelPlayerPopup()">Cancel</button>
+</div>
+
+<table id="playerTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Team</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="player : ${players}">
+        <td th:text="${player.player_id}"></td>
+        <td th:text="${player.first_name}"></td>
+        <td th:text="${player.last_name}"></td>
+        <td th:text="${player.team != null ? player.team.name : 'N/A'}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<script th:inline="javascript">
+    function toggleAddPlayerPopup() {
+        var popup = document.getElementById("addPlayerPopup");
+        if (popup) {
+            if (popup.style.display === 'none' || popup.style.display === '') {
+                popup.style.display = 'block';
+            } else {
+                popup.style.display = 'none';
+            }
+        }
+    }
+
+    function toggleDelPlayerPopup() {
+        var popup = document.getElementById("delPlayerPopup");
+        if (popup) {
+            if (popup.style.display === 'none' || popup.style.display === '') {
+                popup.style.display = 'block';
+            } else {
+                popup.style.display = 'none';
+            }
+        }
+    }
+
+    function submitAddForm() {
+        toggleAddPlayerPopup();
+        return true;
+    }
+
+    function submitDelForm() {
+        console.log("Submitting Delete Form");
+        toggleDelPlayerPopup();
+        return true;
+    }
+</script>
+
+
+</body>
 </html>

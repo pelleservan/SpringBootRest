@@ -11,9 +11,12 @@ public class Player {
 
     private String last_name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "team_id")
     private Team team;
+
+    @Transient
+    private Long teamId;
 
     public Player() {}
 
@@ -23,7 +26,7 @@ public class Player {
         this.team = team;
     }
 
-    public Long getId() {
+    public Long getPlayer_id() {
         return this.player_id;
     }
 
@@ -37,6 +40,10 @@ public class Player {
 
     public Team getTeam() {
         return this.team;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 
     public void setId(Long player_id) {
@@ -53,5 +60,9 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public Long getTeamId() {
+        return teamId;
     }
 }

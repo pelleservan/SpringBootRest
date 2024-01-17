@@ -34,16 +34,27 @@ public class TeamRestController {
     }
 
     @PutMapping("/{team_id}")
-    Team replaceTeam(@RequestBody Team newTeam, @PathVariable Long team_id) {
-        return  repository.findById(team_id)
+    Team updateTeam(@RequestBody Team updatedTeam, @PathVariable Long team_id) {
+        return repository.findById(team_id)
                 .map(team -> {
-                    team.setName(newTeam.getName());
+                    team.setName(updatedTeam.getName());
+                    // Mettez à jour d'autres champs si nécessaire
                     return repository.save(team);
                 })
-                .orElseGet(() -> {
-                    newTeam.setId(team_id);
-                    return repository.save(newTeam);
-                });
+                .orElseThrow(() -> new TeamNotFoundException(team_id));
+    }
+
+    @PatchMapping("/{team_id}")
+    Team partiallyUpdateTeam(@RequestBody Team updatedTeam, @PathVariable Long team_id) {
+        return repository.findById(team_id)
+                .map(team -> {
+                    if (updatedTeam.getName() != null) {
+                        team.setName(updatedTeam.getName());
+                    }
+                    // Mettez à jour d'autres champs si nécessaire
+                    return repository.save(team);
+                })
+                .orElseThrow(() -> new TeamNotFoundException(team_id));
     }
 
     @DeleteMapping("/{team_id}")
