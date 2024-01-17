@@ -57,7 +57,7 @@ Suivre les étape décrite dans cette vidéo :
 ![Capture d'écran 1](images/getPlayerList.png)
 *Récupération de la liste des joueurs.*
 
-Pour une visualisation plus simple des données des styles ont été développer pour organiser les données. Ces tables sont disponible via :
+Pour une visualisation plus simple des données des styles ont été développer pour organiser les données à l'aide de Thymleaf. Ces tables sont disponible via :
 
 - **Récupérer la liste des équipes dans :**
   ```bash
