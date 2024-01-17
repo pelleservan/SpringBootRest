@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class Player {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "team_id")
+    @JsonIgnore
     private Team team;
 
     @Transient
@@ -24,6 +26,7 @@ public class Player {
         this.first_name = first_name;
         this.last_name = last_name;
         this.team = team;
+        this.teamId = team.getId();
     }
 
     public Long getPlayer_id() {

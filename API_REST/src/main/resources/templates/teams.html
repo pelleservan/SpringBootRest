@@ -101,6 +101,12 @@
         <td th:text="${team.name}"></td>
         <td th:text="${team.players.size()}"></td>
         <td>
+            <ul>
+                <li th:each="player : ${team.players}">
+                    <span th:text="${player.first_name} + ' ' + ${player.last_name}"></span>
+                </li>
+            </ul>
+        </td>
     </tr>
     </tbody>
 </table>
