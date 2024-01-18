@@ -35,11 +35,15 @@ Il est important de commencer par insérer des équipes si l'on veux ratacher de
 
 - POSTMAN :
 
-1. Consulter la documentation [https://www.postman.com/api-documentation-tool/](https://www.postman.com/api-documentation-tool/) pour créer des requête **POST** sur l'url `http://localhost:8080/api/teams` (pout une équipe) et `http://localhost:8080/api/players` pour un joueur.
+  Importer `./API_REST/postman/REST_API.json` dans postman. Vous y trouverez des exemple de requête **POST**, **PATCH**, **DEL** et **GET** sur `http://localhost:8080/api/teams` (pout les équipes) et   `http://localhost:8080/api/players` (pour les joueurs). Pour définir vos requête vous pouvez utiliser celles définit dans les fichiers `./API_REST/src/main/resources/data`.
 
-Suivre les étape décrite dans cette vidéo :
+- Script AXIOS :
 
-![Démo Postman](images/addPlayer.gif)
+  Le script `./API_REST/scripts/CRUD.js` permet de récuper les données **Teams** & **Players**.
+  Pour l'exécuter :
+    1. Accéder au répertoir du script : `cd le répertoir`.
+    2. Lancer le script : `node CRUD.JS`.
+    3. Les résultars s'afficherons dans votre terminal.
 
 ### Récupération de données
 
